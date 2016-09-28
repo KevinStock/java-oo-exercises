@@ -1,59 +1,95 @@
-import java.util.Arrays;
 
 public class Robot {
 
+	// Attributes
 	private String name;
-	private int[] position;
+	private int posX;
+	private int posY;
 	private int speed;
-	private int[] orientation;
+	private char orientation;
 	
-	public Robot(String name, int[] position, int speed, int[] orientation) {
+	/**
+	 * Robot Constructor
+	 * @param name
+	 * @param posX
+	 * @param posY
+	 * @param speed
+	 * @param orientation
+	 */
+	public Robot(String name, int posX, int posY, int speed, char orientation) {
 		this.name = name;
-		this.position = position;
+		this.posX = posX;
+		this.posY = posY;
 		this.speed = speed;
 		this.orientation = orientation;
 	}
-	
-	/*
-	 * [1,0]  = North
-	 * [0,1]  = East
-	 * [-1,0] = South
-	 * [0,-1] = West
-	*/
-	
+
+	/**
+	 * Move a robot according to direction and distance from current position
+	 */
 	public void moveRobot() {
-		for (int i = 0; i < position.length; i++) {
-			for (int j = this.speed; j > 0; j--) {
-				this.position[i] += this.orientation[i];
-			}
+		switch (this.orientation) {
+			case 'N':
+				this.posX += this.speed;
+				break;
+			case 'E':
+				this.posY += this.speed;
+				break;
+			case 'S':
+				this.posX -= this.speed;
+				break;
+			case 'W':
+				this.posY -= this.speed;
+				break;
 		}
 	}
 	
+	/**
+	 * Rotate a robot clockwise
+	 */
 	public void rotate() {
-		for (int i = 0; i < this.orientation.length; i++) {
-			if (this.orientation[i] < 0) {
-				this.orientation[i] += 1;
-			}
-			else {
-				this.orientation[i] += -1;
-			}
-			
+		switch (this.orientation) {
+			case 'N':
+				this.orientation = 'E';
+				break;
+			case 'E':
+				this.orientation = 'S';
+				break;
+			case 'S':
+				this.orientation = 'W';
+				break;
+			case 'W':
+				this.orientation = 'N';
 		}
 	}
 	
-	public int distance(Robot r2) {
-		
-		return 0;
+	/** Get the distance between two robots
+	 * @param r2
+	 * @return
+	 */
+	public double getDistance(Robot r2) {
+		return Math.sqrt(Math.pow(((double)r2.posX - (double)this.posX), 2) + Math.pow(((double)r2.posY - (double)this.posY), 2));
 	}
 	
+	// Display robot detail
 	public String toString() {
-		return "Name: " + this.name + " Position: " + Arrays.toString(this.position) + " Speed: " + this.speed + " Orientation: " + Arrays.toString(this.orientation);
+		return "Name: " + this.name + " Position: " + this.posX + "," + this.posY + " Speed: " + this.speed + " Orientation: " + this.orientation;
 	}
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Robot r1 = new Robot("Bob", new int[]{5,5}, 3, new int[]{1,0});
+
+		Robot r1 = new Robot("Bob", 5, 5, 3, 'S');
 		System.out.println(r1.toString());
+		r1.moveRobot();
+		System.out.println("Moved");
+		System.out.println(r1.toString());
+		r1.rotate();
+		System.out.println("Rotated");
+		r1.moveRobot();
+		System.out.println("Moved");		
+		System.out.println(r1.toString());
+		r1.rotate();
+		System.out.println("Rotated");
 		r1.moveRobot();
 		System.out.println("Moved");
 		System.out.println(r1.toString());
@@ -63,12 +99,9 @@ public class Robot {
 		r1.rotate();
 		System.out.println("Rotated");
 		System.out.println(r1.toString());
-		r1.rotate();
-		System.out.println("Rotated");
-		System.out.println(r1.toString());
-		r1.rotate();
-		System.out.println("Rotated");
-		System.out.println(r1.toString());
+		
+		Robot r2 = new Robot("John", 1, 1, 5, 'E');
+		System.out.println(r2.getDistance(r1));
 	}
 
 }
