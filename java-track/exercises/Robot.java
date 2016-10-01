@@ -3,8 +3,9 @@ public class Robot {
 
 	// Attributes
 	private String name;
-	private int posX;
-	private int posY;
+	//private int posX;
+	//private int posY;
+	private int[] position;
 	private int speed;
 	private char orientation;
 	
@@ -16,12 +17,25 @@ public class Robot {
 	 * @param speed
 	 * @param orientation
 	 */
-	public Robot(String name, int posX, int posY, int speed, char orientation) {
+	public Robot(String name, int[] position, int speed, char orientation) {
 		this.name = name;
-		this.posX = posX;
-		this.posY = posY;
+		this.position = position;
+		//this.posX = posX;
+		//this.posY = posY;
 		this.speed = speed;
 		this.orientation = orientation;
+	}
+	
+	public int getPosX() {
+		return position[0];
+	}
+
+	public int getPosY() {
+		return position[1];
+	}
+
+	public char getOrientation() {
+		return orientation;
 	}
 
 	/**
@@ -30,16 +44,16 @@ public class Robot {
 	public void moveRobot() {
 		switch (this.orientation) {
 			case 'N':
-				this.posX += this.speed;
+				this.position[0] += this.speed;
 				break;
 			case 'E':
-				this.posY += this.speed;
+				this.position[1] += this.speed;
 				break;
 			case 'S':
-				this.posX -= this.speed;
+				this.position[0] -= this.speed;
 				break;
 			case 'W':
-				this.posY -= this.speed;
+				this.position[1] -= this.speed;
 				break;
 		}
 	}
@@ -68,17 +82,20 @@ public class Robot {
 	 * @return
 	 */
 	public double getDistance(Robot r2) {
-		return Math.sqrt(Math.pow(((double)r2.posX - (double)this.posX), 2) + Math.pow(((double)r2.posY - (double)this.posY), 2));
+		return Math.sqrt(Math.pow(((double)r2.position[0] - (double)this.position[0]), 2) + 
+				Math.pow(((double)r2.position[1] - (double)this.position[1]), 2));
 	}
 	
 	// Display robot detail
 	public String toString() {
-		return "Name: " + this.name + " Position: " + this.posX + "," + this.posY + " Speed: " + this.speed + " Orientation: " + this.orientation;
+		return "Name: " + this.name + " Position: " + this.position[0] + "," +
+				this.position[1] + " Speed: " + this.speed +
+				" Orientation: " + this.orientation;
 	}
 	
 	public static void main(String[] args) {
 
-		Robot r1 = new Robot("Bob", 5, 5, 3, 'S');
+		Robot r1 = new Robot("Bob", new int[] {5, 5}, 3, 'S');
 		System.out.println(r1.toString());
 		r1.moveRobot();
 		System.out.println("Moved");
@@ -100,8 +117,9 @@ public class Robot {
 		System.out.println("Rotated");
 		System.out.println(r1.toString());
 		
-		Robot r2 = new Robot("John", 1, 1, 5, 'E');
-		System.out.println(r2.getDistance(r1));
+		Robot r2 = new Robot("John", new int[] {1, 1}, 5, 'E');
+		System.out.println(r1.getDistance(r2));
+		System.out.println((double)Math.round(r1.getDistance(r2) * 10000.0) / 10000.0);
 	}
 
 }
