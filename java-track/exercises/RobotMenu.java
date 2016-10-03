@@ -1,9 +1,5 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
-
-import encapsulation.ComputerMenu;
-
 
 public class RobotMenu {
 
@@ -20,12 +16,12 @@ public class RobotMenu {
 		int x = 0;
 		RobotMenu rm = new RobotMenu();
 		do {
-			x = rm.RobotMenu();
+			x = rm.robotMenu();
 			rm.processInput(x);
-		} while (x != 5);
+		} while (x != 6);
 	}
 	
-	public int RobotMenu() {
+	public int robotMenu() {
 		System.out.println("1. Create a robot");
 		System.out.println("2. Display the list of available robots");
 		System.out.println("3. Move a robot");
@@ -49,13 +45,25 @@ public class RobotMenu {
 			displayRobots();
 		}
 		else if (selection == 3) {
-			
+			Robot selectedRobot = selectRobot();
+			selectedRobot.moveRobot();
+			System.out.println("Here is the robot's status after it moved:");
+			System.out.println(selectedRobot);
+			System.out.println();
 		}
 		else if (selection == 4) {
-			
+			Robot selectedRobot = selectRobot();
+			selectedRobot.rotate();
+			System.out.println("Here is the robot's status after it rotated:");
+			System.out.println(selectedRobot);
+			System.out.println();
 		}
 		else if (selection == 5) {
-			
+			Robot firstRobot = selectRobot();
+			Robot secondRobot = selectRobot();
+			double distance = firstRobot.getDistance(secondRobot);
+			System.out.println("The distance between the robots you selected is: " + distance);
+			System.out.println();
 		}
 	}
 	
@@ -93,11 +101,23 @@ public class RobotMenu {
 		}
 		robots.add(new Robot(name, new int[] {x, y}, speed, orientation));
 	}
-	
+
 	private void displayRobots() {
 		for (int i = 0; i < robots.size(); i++) {
 			System.out.println((i+1) + ".)" + robots.get(i));
-			System.out.println();
 		}
+		System.out.println();
 	}
+
+	private Robot selectRobot() {
+		System.out.println("\nPlease select a robot: ");
+		displayRobots();
+		int selection = s.nextInt();
+		while (selection < 1 || selection > robots.size()) {
+			System.out.println("Invalid selection, please try again: ");
+			selection = s.nextInt();
+		}
+		return robots.get(selection - 1);
+	}
+	
 }
