@@ -9,6 +9,14 @@ public class Fraction {
 		this.denominator = denominator;
 	}
 	
+	public int getNumerator() {
+		return numerator;
+	}
+
+	public int getDenominator() {
+		return denominator;
+	}
+
 	public Fraction fAdd(Fraction that) {
 		int commonDenominator = 0;
 		
