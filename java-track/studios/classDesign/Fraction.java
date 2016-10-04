@@ -40,18 +40,18 @@ public class Fraction {
 	}
 	
 	public Fraction fSimple() {
-		int greatestCommonFactor = 0;
+		int gcf = 0;
 		if (this.denominator > this.numerator) {
-			greatestCommonFactor = this.numerator;
+			gcf = this.numerator;
 		}
 		else {
-			greatestCommonFactor = this.denominator;
+			gcf = this.denominator;
 		}
 
-		for (int i = greatestCommonFactor - 1; i > 0; i--) {
+		for (int i = gcf; i > 0; i--) {
 			if (this.denominator % i == 0 && this.numerator % i == 0) {
-				greatestCommonFactor = i;
-				return new Fraction(this.numerator / greatestCommonFactor, this.denominator / greatestCommonFactor);
+				gcf = i;
+				return new Fraction(this.numerator / gcf, this.denominator / gcf);
 			}
 		}
 		return new Fraction(this.numerator, this.denominator);
@@ -70,7 +70,7 @@ public class Fraction {
 		Fraction f5 = f1.fRecip();
 		System.out.println(f5.numerator + "/" + f5.denominator);
 		
-		Fraction f6 = new Fraction(32, 86);
+		Fraction f6 = new Fraction(6, 18);
 		Fraction f7 = f6.fSimple();
 		System.out.println(f7.numerator + "/" + f7.denominator);
 	}
