@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-//package pset9;
-=======
->>>>>>> ce668c52a19d7079165930cec01ade9e26b8989c
+
 import static org.junit.Assert.*;
 
 import org.junit.Test;
