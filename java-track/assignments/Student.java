@@ -91,12 +91,12 @@ public class Student {
 	}
 	
 	// create a legacy student
-	public Student createLegacy(Student ss) {
-		String firstName = this.getName();
+	public Student createLegacy(Student s, Student ss) {
+		String firstName = s.getName();
 		String lastName = ss.getName();
-		int studentID = this.getStudentID() + ss.getStudentID();
-		double gpa = (this.getGPA() + ss.getGPA()) / 2;
-		int credits = Math.max(this.getCredits(), ss.getCredits());
+		int studentID = s.getStudentID() + ss.getStudentID();
+		double gpa = (s.getGPA() + ss.getGPA()) / 2;
+		int credits = Math.max(s.getCredits(), ss.getCredits());
 		
 		return new Student(firstName, lastName, studentID, credits, gpa);
 	}
