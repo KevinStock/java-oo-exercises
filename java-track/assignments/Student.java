@@ -75,14 +75,18 @@ public class Student {
 	
 	// compute tuition based on credits
 	public double computeTuition() {
-		double tuitionPaid = 20000.0;
+		double tuitionPaid = 0.0;
 		int remainingCredits = credits;
-
-		while (remainingCredits > 15) {
-			tuitionPaid += 20000.0;
-			remainingCredits -= 15;
+		while (remainingCredits > 0) {
+			if (remainingCredits > 14) {
+				tuitionPaid += 20000.0;
+				remainingCredits -= 15;
+			}
+			else {
+				tuitionPaid += 1333.33 * remainingCredits;
+				remainingCredits = 0;
+			}
 		}
-		
 		return tuitionPaid;
 	}
 	
