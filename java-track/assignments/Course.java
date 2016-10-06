@@ -5,6 +5,7 @@ public class Course {
 	private String name;
 	private int credits;
 	private int seats;
+	//private int remainingSeats;
 	private Student[] roster;
 	
 	// Constructor
@@ -22,6 +23,7 @@ public class Course {
 	
 	// calculate unfilled seats for course and return it
 	public int getRemainingSeats() {
+		//return remainingSeats;
 		int seatsTaken = 0;
 		// iterate through the roster looking for filled seats
 		for (int i = 0; i < roster.length; i++) {
@@ -44,6 +46,7 @@ public class Course {
 		// check if there is a seat available and if so add the student
 		if (getRemainingSeats() > 0) {
 			roster[seats - getRemainingSeats()] = s;
+			//remainingSeats--;
 			return true;
 		}
 		else {
