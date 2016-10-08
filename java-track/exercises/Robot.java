@@ -2,7 +2,7 @@
 public class Robot {
 
 	// Attributes
-	private String name;
+	protected String name;
 	//private int posX;
 	//private int posY;
 	private int[] position;
@@ -87,36 +87,41 @@ public class Robot {
 	}
 	
 	// Display robot detail
-	public String toString() {
-		return "Name: " + this.name + " Position: " + this.position[0] + "," +
+	public void printDescription() {
+		System.out.print("Name: " + this.name + " Position: " + this.position[0] + "," +
 				this.position[1] + " Speed: " + this.speed +
-				" Orientation: " + this.orientation;
+				" Orientation: " + this.orientation);
 	}
 	
 	public static void main(String[] args) {
 
 		Robot r1 = new Robot("Bob", new int[] {5, 5}, 3, 'S');
-		System.out.println(r1.toString());
+		r1.printDescription();
 		r1.moveRobot();
+		System.out.println();
 		System.out.println("Moved");
-		System.out.println(r1.toString());
+		r1.printDescription();
 		r1.rotate();
+		System.out.println();
 		System.out.println("Rotated");
 		r1.moveRobot();
 		System.out.println("Moved");		
-		System.out.println(r1.toString());
+		r1.printDescription();
 		r1.rotate();
+		System.out.println();
 		System.out.println("Rotated");
 		r1.moveRobot();
 		System.out.println("Moved");
-		System.out.println(r1.toString());
+		r1.printDescription();
 		r1.rotate();
+		System.out.println();
 		System.out.println("Rotated");
-		System.out.println(r1.toString());
+		r1.printDescription();
 		r1.rotate();
+		System.out.println();
 		System.out.println("Rotated");
-		System.out.println(r1.toString());
-		
+		r1.printDescription();
+		System.out.println();
 		Robot r2 = new Robot("John", new int[] {1, 1}, 5, 'E');
 		System.out.println(r1.getDistance(r2));
 		System.out.println((double)Math.round(r1.getDistance(r2) * 10000.0) / 10000.0);
