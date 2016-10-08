@@ -4,7 +4,7 @@ public class Computer {
 
 	// attributes
 	private int memory;
-	private double size;
+	protected double size;
 	private double processor;
 	private String brand;
 	
