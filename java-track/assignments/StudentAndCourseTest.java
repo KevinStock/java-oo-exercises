@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 
 import static org.junit.Assert.*;
 
+=======
+>>>>>>> 2c2d329fd93f9216ab0f6c627e75f3b3926c04d1
 import org.junit.Test;
 
 import junit.framework.TestCase;
