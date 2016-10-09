@@ -15,6 +15,10 @@ public class RobotMenu2 {
 	private JFrame frmRobotMenu;
 	private DefaultListModel<Robot> listModel;
 	private JList<Robot> robotList;
+	private JButton btnMoveRobot;
+	private JButton btnRotateRobot;
+	private JButton btnComputeDistance;
+	private JButton btnDeleteRobot;
 	
 
 	/**
@@ -78,53 +82,92 @@ public class RobotMenu2 {
 				char orientation = getOrientation("What is the robot's orientation? (N, E, S, W)", "Robot's Orientation Dialog");
 				Robot robot = new Robot(name, new int[] {posX, posY}, speed, orientation);
 				listModel.add(listModel.size(), robot);
-				
+				btnUpdate();
 			}
 		});
 		btnCreateRobot.setBounds(6, 6, 150, 30);
 		frmRobotMenu.getContentPane().add(btnCreateRobot);
 		
 		// move an existing robot
-		JButton btnMoveRobot = new JButton("Move Robot");
+		btnMoveRobot = new JButton("Move Robot");
 		btnMoveRobot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int selected = robotList.getSelectedIndex();
-				listModel.get(selected).moveRobot();
+				if (selected >= 0) {
+					listModel.get(selected).moveRobot();	
+				}
+				else {
+					JOptionPane.showMessageDialog(
+							frmRobotMenu,
+							"Please select a robot.",
+							"Selection Error", JOptionPane.PLAIN_MESSAGE);
+				}
 			}
 		});
-		btnMoveRobot.setBounds(6, 48, 150, 30);
+		btnMoveRobot.setBounds(6, 33, 150, 30);
 		frmRobotMenu.getContentPane().add(btnMoveRobot);
 		
 		
 		// rotate an existing robot
-		JButton btnRotateRobot = new JButton("Rotate Robot");
+		btnRotateRobot = new JButton("Rotate Robot");
 		btnRotateRobot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int selected = robotList.getSelectedIndex();
-				listModel.get(selected).rotate();				
+				if (selected >= 0) {
+					listModel.get(selected).rotate();
+				}
+				else {
+					JOptionPane.showMessageDialog(
+							frmRobotMenu,
+							"Please select a robot.",
+							"Selection Error", JOptionPane.PLAIN_MESSAGE);
+				}
 			}
 		});
-		btnRotateRobot.setBounds(6, 90, 150, 30);
+		btnRotateRobot.setBounds(6, 59, 150, 30);
 		frmRobotMenu.getContentPane().add(btnRotateRobot);
 		
 		// compute the distance between two robots
-		JButton btnComputeDistance = new JButton("Compute Distance");
+		btnComputeDistance = new JButton("Compute Distance");
 		btnComputeDistance.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int[] selected = robotList.getSelectedIndices();
-				Robot r1 = listModel.get(selected[0]);
-				Robot r2 = listModel.get(selected[1]);
-				double distance = r1.getDistance(r2);
-				JOptionPane.showMessageDialog(
-						frmRobotMenu,
-						(r1.name + " is " + distance + " from " + r2.name),
-						"Distance", JOptionPane.PLAIN_MESSAGE);
-				
-				System.out.println(distance);
+				if (selected.length == 2) {
+					Robot r1 = listModel.get(selected[0]);
+					Robot r2 = listModel.get(selected[1]);
+					double distance = r1.getDistance(r2);
+					JOptionPane.showMessageDialog(
+							frmRobotMenu,
+							(r1.name + " is " + distance + " from " + r2.name),
+							"Distance", JOptionPane.PLAIN_MESSAGE);
+				}
+				else {
+					JOptionPane.showMessageDialog(
+							frmRobotMenu,
+							"Please select 2 robots to compute the distance.",
+							"Selection Error", JOptionPane.PLAIN_MESSAGE);
+				}
 			}
 		});
-		btnComputeDistance.setBounds(6, 132, 150, 30);
+		btnComputeDistance.setBounds(6, 85, 150, 30);
 		frmRobotMenu.getContentPane().add(btnComputeDistance);
+		
+		// delete existing robots
+		btnDeleteRobot = new JButton("Delete Robot");
+		btnDeleteRobot.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int[] selected = robotList.getSelectedIndices();
+				for (int i = 0; i < selected.length; i++) {
+					//robotList.remove(selected[i]);
+					listModel.remove(selected[i]);
+				}
+				btnUpdate();
+			}
+		});
+		btnDeleteRobot.setBounds(6, 127, 150, 30);
+		frmRobotMenu.getContentPane().add(btnDeleteRobot);
+		
+		btnUpdate();
 	}
 
 	// get a positive integer from the user
@@ -172,6 +215,24 @@ public class RobotMenu2 {
 			orientation = s.charAt(0);
 		}
 		return orientation;
+	}
+
+	private void btnUpdate() {
+		if (listModel.size() > 0) {
+			btnMoveRobot.setEnabled(true);
+			btnRotateRobot.setEnabled(true);
+			if (listModel.size() > 1) {
+				btnComputeDistance.setEnabled(true);
+			}
+			else {
+				btnComputeDistance.setEnabled(false);
+			}
+			btnDeleteRobot.setEnabled(true);
+		}
+		else {
+			btnMoveRobot.setEnabled(false);
+			btnRotateRobot.setEnabled(false);
+		}
 	}
 	
 }
