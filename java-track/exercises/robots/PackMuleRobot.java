@@ -1,3 +1,4 @@
+package robots;
 import java.util.ArrayList;
 
 public class PackMuleRobot extends Robot {

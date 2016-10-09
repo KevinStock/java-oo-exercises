@@ -1,4 +1,4 @@
-
+package robots;
 public class AttackRobot extends Robot {
 
 	private int maxDamage;
