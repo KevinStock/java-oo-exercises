@@ -48,19 +48,19 @@ public class Student {
 	// get class standing for student
 	public String getClassStanding() {
 		// less than 30 credits is a freshman
-		if (credits < 30) {
+		if (this.getCredits() < 30) {
 			return "Freshman";
 		}
 		// 30 - 60 credits is a sophomore
-		else if (credits >= 30 && credits < 60) {
+		else if (this.getCredits() >= 30 && credits < 60) {
 			return "Sophomore";
 		}
 		// 60 - 90 credits is a junior
-		else if (credits >= 60 && credits < 90) {
+		else if (this.getCredits() >= 60 && credits < 90) {
 			return "Junior";
 		}
 		// 90 or more credits is a senior
-		else if (credits >= 90) {
+		else if (this.getCredits() >= 90) {
 			return "Senior";
 		}
 		return "Error";
@@ -91,20 +91,21 @@ public class Student {
 	}
 	
 	// create a legacy student
-	public Student createLegacy(Student s, Student ss) {
-		String firstName = s.getName();
-		String lastName = ss.getName();
-		int studentID = s.getStudentID() + ss.getStudentID();
-		double gpa = (s.getGPA() + ss.getGPA()) / 2;
-		int credits = Math.max(s.getCredits(), ss.getCredits());
+	public Student createLegacy(Student parent1, Student parent2) {
+		String firstName = parent1.getName();
+		String lastName = parent2.getName();
+		int studentID = parent1.getStudentID() + parent2.getStudentID();
+		double gpa = (parent1.getGPA() + parent2.getGPA()) / 2;
+		int credits = Math.max(parent1.getCredits(), parent2.getCredits());
 		
 		return new Student(firstName, lastName, studentID, credits, gpa);
 	}
 
 	@Override
 	public String toString() {
-		return "Student [firstName=" + firstName + ", lastName=" + lastName + ", studentID=" + studentID + ", credits="
-				+ credits + ", qualityScore=" + qualityScore + ", gpa=" + gpa + "]";
+		return "Student [firstName=" + firstName + ", lastName=" + lastName +
+				", studentID=" + studentID + ", credits=" + credits + ", qualityScore=" + 
+				qualityScore + ", gpa=" + gpa + "]";
 	}
 	
 	public static void main(String[] args) {
