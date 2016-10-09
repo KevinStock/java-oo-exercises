@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
+import java.awt.Color;
 
 public class Counter {
 
@@ -53,6 +54,8 @@ public class Counter {
 		frmCounter.getContentPane().add(lblCounter);
 		
 		tfCount = new JTextField("0");
+		tfCount.setBackground(Color.LIGHT_GRAY);
+		tfCount.setEditable(false);
 		tfCount.setHorizontalAlignment(SwingConstants.CENTER);
 		tfCount.setBounds(119, 30, 130, 26);
 		frmCounter.getContentPane().add(tfCount);
