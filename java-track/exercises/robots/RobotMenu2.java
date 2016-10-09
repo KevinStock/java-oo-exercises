@@ -76,10 +76,14 @@ public class RobotMenu2 {
 						null,
 						null,
 						"");
-				int posX = getPositiveValue("What is the robot's starting X Position?", "Robot X Position Dialog");
-				int posY = getPositiveValue("What is the robot's starting Y Position?", "Robot Y Position Dialog");
-				int speed = getPositiveValue("What is the robot's speed?", "Robot Speed Dialog");
-				char orientation = getOrientation("What is the robot's orientation? (N, E, S, W)", "Robot's Orientation Dialog");
+				int posX = getPositiveValue("What is the robot's starting X Position?",
+											"Robot X Position Dialog");
+				int posY = getPositiveValue("What is the robot's starting Y Position?",
+											"Robot Y Position Dialog");
+				int speed = getPositiveValue("What is the robot's speed?",
+											 "Robot Speed Dialog");
+				char orientation = getOrientation("What is the robot's orientation? (N, E, S, W)",
+												  "Robot's Orientation Dialog");
 				Robot robot = new Robot(name, new int[] {posX, posY}, speed, orientation);
 				listModel.add(listModel.size(), robot);
 				btnUpdate();
