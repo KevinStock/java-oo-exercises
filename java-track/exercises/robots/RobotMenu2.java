@@ -217,6 +217,7 @@ public class RobotMenu2 {
 		return orientation;
 	}
 
+	// udpates btn status as appropriate
 	private void btnUpdate() {
 		if (listModel.size() > 0) {
 			btnMoveRobot.setEnabled(true);
