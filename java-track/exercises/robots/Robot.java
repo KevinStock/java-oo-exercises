@@ -1,5 +1,7 @@
 package robots;
 
+import java.util.Arrays;
+
 public class Robot {
 
 	// Attributes
@@ -94,6 +96,13 @@ public class Robot {
 				" Orientation: " + this.orientation);
 	}
 	
+	
+	@Override
+	public String toString() {
+		return "Name: " + name + " Position: " + Arrays.toString(position) + " Speed: " + speed + " Orientation: "
+				+ orientation;
+	}
+
 	public static void main(String[] args) {
 
 		Robot r1 = new Robot("Bob", new int[] {5, 5}, 3, 'S');
