@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -15,6 +16,7 @@ import java.awt.Color;
 import javax.swing.JRadioButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.awt.event.ActionEvent;
 
 public class Quiz {
@@ -31,7 +33,8 @@ public class Quiz {
 	private JPanel answerPanel;
 	private ArrayList<MultipleChoiceQuestion> questions;
 	private int currentQuestionIndex;
-
+	private ButtonGroup choiceGroup;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -98,30 +101,32 @@ public class Quiz {
 		startPanel.add(lblQuizTime);
 		
 		questionTxt = new JTextField();
+		questionTxt.setHorizontalAlignment(SwingConstants.CENTER);
 		questionTxt.setBackground(Color.LIGHT_GRAY);
 		questionTxt.setEditable(false);
 		questionTxt.setBounds(6, 6, 438, 68);
 		questionPanel.add(questionTxt);
 		questionTxt.setColumns(10);
 		
-		final ButtonGroup choiceGroup = new ButtonGroup();
+		choiceGroup = new ButtonGroup();
 		rdbtnChoice1 = new JRadioButton("New radio button");
-		rdbtnChoice1.setBounds(6, 96, 141, 23);
+		rdbtnChoice1.setBounds(6, 96, 204, 23);
 		choiceGroup.add(rdbtnChoice1);
 		questionPanel.add(rdbtnChoice1);
 		
 		rdbtnChoice2 = new JRadioButton("New radio button");
-		rdbtnChoice2.setBounds(6, 131, 141, 23);
+		rdbtnChoice2.setBounds(6, 131, 204, 23);
 		choiceGroup.add(rdbtnChoice2);
 		questionPanel.add(rdbtnChoice2);
 		
 		rdbtnChoice3 = new JRadioButton("New radio button");
-		rdbtnChoice3.setBounds(240, 96, 141, 23);
+		rdbtnChoice3.setBounds(240, 96, 204, 23);
 		choiceGroup.add(rdbtnChoice3);
 		questionPanel.add(rdbtnChoice3);
 		
 		rdbtnChoice4 = new JRadioButton("New radio button");
-		rdbtnChoice4.setBounds(240, 131, 141, 23);
+		rdbtnChoice4.setVerticalAlignment(SwingConstants.TOP);
+		rdbtnChoice4.setBounds(240, 131, 204, 23);
 		choiceGroup.add(rdbtnChoice4);
 		questionPanel.add(rdbtnChoice4);
 		
@@ -130,16 +135,24 @@ public class Quiz {
 			public void actionPerformed(ActionEvent e) {
 				answerPanel.setVisible(true);
 				questionPanel.setVisible(false);
-				choiceGroup.getSelection();
+				if (checkAnswer()) {
+					answerTxt.setText("CORRECT");
+				}
+				else {
+					answerTxt.setText("WRONG");
+				}
+				
 			}
 		});
 		btnSubmitAnswer.setBounds(148, 205, 127, 29);
 		questionPanel.add(btnSubmitAnswer);
 		
 		answerTxt = new JTextField();
+		answerTxt.setFont(new Font("Lucida Grande", Font.BOLD, 24));
+		answerTxt.setHorizontalAlignment(SwingConstants.CENTER);
 		answerTxt.setEditable(false);
 		answerTxt.setBackground(Color.LIGHT_GRAY);
-		answerTxt.setBounds(6, 6, 438, 84);
+		answerTxt.setBounds(6, 30, 438, 84);
 		answerPanel.add(answerTxt);
 		answerTxt.setColumns(10);
 		
@@ -148,6 +161,7 @@ public class Quiz {
 			public void actionPerformed(ActionEvent e) {
 				answerPanel.setVisible(false);
 				questionPanel.setVisible(true);
+				displayQuestion();
 			}
 		});
 		btnNextQuestion.setBounds(170, 212, 117, 29);
@@ -159,11 +173,11 @@ public class Quiz {
 	private void createQuestions() {
 		questions = new ArrayList<MultipleChoiceQuestion>();
 		MultipleChoiceQuestion q1 = new MultipleChoiceQuestion("What is the air-speed velocity of an unladen swallow?",
-																new String[] {"12", "24", "African or European", "2"},
-																3);
+																new String[] {"12", "24", "African or European?", "2"},
+																2);
 		MultipleChoiceQuestion q2 = new MultipleChoiceQuestion("What is your name?",
 																new String[] {"John", "Henry", "George", "Sir Lancelot of Camelot"},
-																4);
+																3);
 		questions.add(q1);
 		questions.add(q2);	
 	}
@@ -176,6 +190,7 @@ public class Quiz {
 	
 	private void displayQuestion() {
 		MultipleChoiceQuestion q = pickQuestion();
+		choiceGroup.clearSelection();
 		questionTxt.setText(q.question);
 		String[] choices = q.getChoices();
 		rdbtnChoice1.setText(choices[0]);
@@ -185,7 +200,16 @@ public class Quiz {
 	}
 	
 	private boolean checkAnswer() {
-		
-		return true;
+		for (Enumeration<AbstractButton> buttons = choiceGroup.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button = buttons.nextElement();
+
+            if (button.isSelected()) {
+                if (button.getText() == questions.get(currentQuestionIndex).getAnswer()) {
+                	return true;
+                }
+                return false;
+            }
+        }
+		return false;
 	}
 }
