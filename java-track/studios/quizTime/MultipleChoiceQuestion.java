@@ -15,8 +15,8 @@ public class MultipleChoiceQuestion extends Question {
 		return choices;
 	}
 	
-	public int getAnswer() {
-		return answer;
+	public String getAnswer() {
+		return choices[answer];
 	}
 	
 }
