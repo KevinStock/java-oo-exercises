@@ -20,4 +20,15 @@ public class ComputerTest {
 		c.addMemory(2);
 		assertTrue("Problem updating memory in addMemory(), when we hit the maximum allowed", c.getMemory() == 16);
 	}
+
+	@Test
+	public void testInvalidMemory() {
+		try {
+			Computer c = new Computer(-16, 100, 100, "Lenovo");
+			fail("Exception was not thrown for invalid value");
+		}
+		catch (IllegalArgumentException e) {
+			assertTrue(true);
+		}
+	}
 }
