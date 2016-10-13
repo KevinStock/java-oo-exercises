@@ -12,6 +12,10 @@ public class AttackRobot extends Robot {
 		this.attackRange = attackRange;
 	}
 	
+	public int getAttackRange() {
+		return attackRange;
+	}
+	
 	public void attack(AttackRobot ar2) {
 		if (isDead()) {
 			System.out.println(name + " cannot attack because it is dead");

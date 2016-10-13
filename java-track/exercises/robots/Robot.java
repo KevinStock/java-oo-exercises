@@ -11,6 +11,7 @@ public class Robot {
 	private int[] position;
 	private int speed;
 	private char orientation;
+	private RobotBehavior behavior;
 	
 	/**
 	 * Robot Constructor
@@ -96,6 +97,10 @@ public class Robot {
 				" Orientation: " + this.orientation);
 	}
 	
+	public void setBehavior(RobotBehavior behavior) {
+		this.behavior = behavior;
+	}
+	
 	
 	@Override
 	public String toString() {
@@ -105,36 +110,15 @@ public class Robot {
 
 	public static void main(String[] args) {
 
-		Robot r1 = new Robot("Bob", new int[] {5, 5}, 3, 'S');
-		r1.printDescription();
-		r1.moveRobot();
-		System.out.println();
-		System.out.println("Moved");
-		r1.printDescription();
-		r1.rotate();
-		System.out.println();
-		System.out.println("Rotated");
-		r1.moveRobot();
-		System.out.println("Moved");		
-		r1.printDescription();
-		r1.rotate();
-		System.out.println();
-		System.out.println("Rotated");
-		r1.moveRobot();
-		System.out.println("Moved");
-		r1.printDescription();
-		r1.rotate();
-		System.out.println();
-		System.out.println("Rotated");
-		r1.printDescription();
-		r1.rotate();
-		System.out.println();
-		System.out.println("Rotated");
-		r1.printDescription();
-		System.out.println();
-		Robot r2 = new Robot("John", new int[] {1, 1}, 5, 'E');
-		System.out.println(r1.getDistance(r2));
-		System.out.println((double)Math.round(r1.getDistance(r2) * 10000.0) / 10000.0);
+		AttackRobot ar1 = new AttackRobot("Kevin", new int[] {5, 5}, 3, 'N', 10, 5);
+		AttackRobot ar2 = new AttackRobot("Joel", new int[] {1, 1}, 3, 'S', 10, 5);
+		ar1.setBehavior(new AggressiveBehavior());
+		ar2.setBehavior(new DefensiveBehavior());
+		
+		while (!ar1.isDead() && !ar2.isDead()) {
+			doNextMove(ar1, ar2);
+			doNextMove(ar2, ar1);	
+		}
 	}
 
 }
