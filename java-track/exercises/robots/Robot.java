@@ -114,11 +114,8 @@ public class Robot {
 		Robot r2 = new AttackRobot("Joel", new int[] {1, 1}, 3, 'S', 5, 10);
 		r1.setBehavior(new AggressiveBehavior());
 		r2.setBehavior(new DefensiveBehavior());
-		System.out.println(r1.toString());
-		System.out.println(r2.toString());
 		r1.behavior.doNextMove(r1, r2);
 		
-//		while (!ar1.isDead() && !ar2.isDead()) {
 		for (int i = 0; i < 10; i++) {
 			r1.behavior.doNextMove(r1, r2);
 			
