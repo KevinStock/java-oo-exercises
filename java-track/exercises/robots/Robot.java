@@ -105,19 +105,24 @@ public class Robot {
 	@Override
 	public String toString() {
 		return "Name: " + name + " Position: " + Arrays.toString(position) + " Speed: " + speed + " Orientation: "
-				+ orientation;
+				+ orientation + " Behavior " + behavior;
 	}
 
 	public static void main(String[] args) {
 
-		AttackRobot ar1 = new AttackRobot("Kevin", new int[] {5, 5}, 3, 'N', 10, 5);
-		AttackRobot ar2 = new AttackRobot("Joel", new int[] {1, 1}, 3, 'S', 10, 5);
-		ar1.setBehavior(new AggressiveBehavior());
-		ar2.setBehavior(new DefensiveBehavior());
+		Robot r1 = new AttackRobot("Kevin", new int[] {5, 5}, 3, 'N', 3, 5);
+		Robot r2 = new AttackRobot("Joel", new int[] {1, 1}, 3, 'S', 5, 10);
+		r1.setBehavior(new AggressiveBehavior());
+		r2.setBehavior(new DefensiveBehavior());
+		System.out.println(r1.toString());
+		System.out.println(r2.toString());
+		r1.behavior.doNextMove(r1, r2);
 		
-		while (!ar1.isDead() && !ar2.isDead()) {
-			doNextMove(ar1, ar2);
-			doNextMove(ar2, ar1);	
+//		while (!ar1.isDead() && !ar2.isDead()) {
+		for (int i = 0; i < 10; i++) {
+			r1.behavior.doNextMove(r1, r2);
+			
+			r2.behavior.doNextMove(r2, r1);
 		}
 	}
 

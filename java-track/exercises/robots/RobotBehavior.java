@@ -2,5 +2,5 @@ package robots;
 
 public interface RobotBehavior {
 
-	public void doNextMove(AttackRobot r1, AttackRobot r2);
+	public void doNextMove(Robot r1, Robot r2);
 }
