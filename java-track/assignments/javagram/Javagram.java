@@ -45,7 +45,7 @@ public class Javagram {
 		Filter filter = null;
 		do {	
 			try {
-				filter = getFilter(filterID);			
+				filter = getFilter(filterID, in);			
 			} catch (Exception e) {
 				System.out.println("Inappropriate choice.");
 				filterID = displayFilterMenu(in);
@@ -79,12 +79,16 @@ public class Javagram {
 	
 	// TODO - refactor this method to accept an int parameter, and return an instance of the Filter interface
 	// TODO - refactor this method to thrown an exception if the int doesn't correspond to a filter
-	private static Filter getFilter(int filterID) {
+	private static Filter getFilter(int filterID, Scanner in) {
 		// TODO - create some more filters, and add logic to return the appropriate one
 		switch (filterID) {	
 			case 1: return new BlueFilter();
 			case 2: return new InvertFilter();
 			case 3: return new GrayscaleFilter();
+			case 4:
+				System.out.println("Enter brightness level:");
+				int level = in.nextInt();
+				return new BrightnessFilter(level);
 			default: throw new ArrayIndexOutOfBoundsException();
 		}	
 	}
@@ -94,7 +98,7 @@ public class Javagram {
 		System.out.println("1. Blue Filter");
 		System.out.println("2. Invert Filter");
 		System.out.println("3. Grayscale Filter");
+		System.out.println("4. Brightness Filter");
 		return in.nextInt();
 	}
-
 }
