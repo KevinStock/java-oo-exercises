@@ -146,7 +146,7 @@ public class BlurFilter implements Filter {
 						int r2 = getWeight(original.get(i + 1, j).getRed(), 3); // right pixel Red
 						int r3 = getWeight(original.get(i, j - 1).getRed(), 3); // top pixel Red
 						int r4 = getWeight(original.get(i, j + 1).getRed(), 3); // bottom pixel Red
-						int newRed = (r1 + r2 + r3) / 17;
+						int newRed = (r1 + r2 + r3 + r4) / 17;
 						
 						int g1 = getWeight(original.get(i, j).getGreen(), 8); // center pixel Green
 						int g2 = getWeight(original.get(i + 1, j).getGreen(), 3); // right pixel Green
