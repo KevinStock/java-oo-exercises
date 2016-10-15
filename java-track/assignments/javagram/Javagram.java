@@ -89,6 +89,7 @@ public class Javagram {
 				System.out.println("Enter brightness level:");
 				int level = in.nextInt();
 				return new BrightnessFilter(level);
+			case 5: return new BlurFilter();
 			default: throw new ArrayIndexOutOfBoundsException();
 		}	
 	}
@@ -99,6 +100,7 @@ public class Javagram {
 		System.out.println("2. Invert Filter");
 		System.out.println("3. Grayscale Filter");
 		System.out.println("4. Brightness Filter");
+		System.out.println("5. Blur Filter");
 		return in.nextInt();
 	}
 }
