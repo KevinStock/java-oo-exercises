@@ -110,7 +110,7 @@ public class StudentAndCourseTest extends TestCase {
 			int c2 = (int)(Math.random() * 120 + 1);
 			double g2 = Math.round(Math.random() * 4000) / 1000.0;
 			ss.submitGrade(g2, c2);
-			Student bb = s.createLegacy(s, ss);
+			Student bb = Student.createLegacy(s, ss);
 			assertTrue("create baby not setting name properly", bb.getName().contains(s.getName()) && bb.getName().contains(ss.getName()));
 			assertEquals("create baby not setting gpa properly", (g + g2) / 2, bb.getGPA(), 0.01);
 			assertEquals("create baby not setting credits properly", bb.getCredits(), Math.max(c, c2));
@@ -223,6 +223,15 @@ public class StudentAndCourseTest extends TestCase {
 			Course cc = new Course("" + a, c, c);
 			assertTrue("course toString does not contain course name", cc.toString().contains("" + a));
 			assertTrue("course toString does not contain credits", cc.toString().contains("" + c));
+		}
+	}
+	
+	@Test
+	public void testCourseList() {
+		Course.getAllCourses().clear();
+		for (int i = 0; i < 15; i++) {
+			Course c = new Course("Test Course " + i, 3, 3);
+			assertEquals("course count incorrect", Course.getAllCourses().size(), i + 1);
 		}
 	}
 
