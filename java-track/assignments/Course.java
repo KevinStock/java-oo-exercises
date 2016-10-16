@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Course {
 
@@ -7,6 +8,7 @@ public class Course {
 	private int seats;
 	//private int remainingSeats;
 	private Student[] roster;
+	private static ArrayList<Course> courses = new ArrayList<Course>();
 	
 	// Constructor
 	public Course(String name, int credits, int seats) {
@@ -14,6 +16,7 @@ public class Course {
 		this.credits = credits;
 		this.seats = seats;
 		roster = new Student[seats];
+		courses.add(this);
 	}
 	
 	// get course name and return it
@@ -66,14 +69,19 @@ public class Course {
 		return totalGPA / (seats - getRemainingSeats());
 	}
 	
+	public static ArrayList<Course> getAllCourses() {
+		return courses;
+	}
+	
 	@Override
 	public String toString() {
-		return "Course Name: " + name + "\nCredits: " + credits;
+		return "Course Name: " + name + " Credits: " + credits + " Seats: " + seats + "\n";
 	}
 
 	public static void main(String[] args) {
 		// construct a course with 3 seats for 3 credits
 		Course c = new Course("Test Course", 3, 3);
+		Course c2 = new Course("Another Course", 2, 3);
 		// construct students
 		Student s = new Student("Kevin", "Stock", 1);
 		Student s2 = new Student("John", "Smith", 2);
@@ -87,7 +95,9 @@ public class Course {
 			}
 		}
 		// print out course information
-		System.out.println("\n" + c);
+		//System.out.println("\n" + c);
+		
+		System.out.println(Course.getAllCourses().toString());
 	}
 
 }
