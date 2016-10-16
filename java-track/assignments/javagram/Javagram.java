@@ -70,9 +70,10 @@ public class Javagram {
 		if (fileName.equals("exit")) {
 			System.out.println("Image not saved");
 		} else {
-			do {
+			while (newFile.exists() && !overwrite) {
 				System.out.println("File already exists. Do you wish to overwrite? (Y/N)");
-				if (in.next().startsWith("Y")) {
+				char answer = in.next().charAt(0);
+				if (Character.toUpperCase(answer) == 'Y') {
 					System.out.println("Overwritting file...");
 					overwrite = true;
 				}
@@ -81,7 +82,7 @@ public class Javagram {
 					fileName = in.next();
 					newFile = new File(dir + File.separator + fileName);
 				}
-			} while (newFile.exists() && !overwrite);
+			}
 			
 			//String absFileName = dir + File.separator + fileName;
 			processed.save(newFile);
