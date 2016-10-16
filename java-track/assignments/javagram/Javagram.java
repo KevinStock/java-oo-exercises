@@ -64,14 +64,31 @@ public class Javagram {
 		String fileName = in.next();
 		
 		// TODO - if the user enters the same file name as the input file, confirm that they want to overwrite the original
+		boolean overwrite = false;
+		File newFile = new File(dir + File.separator + fileName);
 		
 		if (fileName.equals("exit")) {
 			System.out.println("Image not saved");
 		} else {
-			String absFileName = dir + File.separator + fileName;
-			processed.save(absFileName);
-			System.out.println("Image saved to " + absFileName);
-		}	
+			do {
+				System.out.println("File already exists. Do you wish to overwrite? (Y/N)");
+				if (in.next().startsWith("Y")) {
+					System.out.println("Overwritting file...");
+					overwrite = true;
+				}
+				else {
+					System.out.println("Save image to (relative to " + dir + "):");
+					fileName = in.next();
+					newFile = new File(dir + File.separator + fileName);
+				}
+			} while (newFile.exists() && !overwrite);
+			
+			//String absFileName = dir + File.separator + fileName;
+			processed.save(newFile);
+			System.out.println("Image saved to " + newFile);
+		}
+		
+	
 		
 		// close input scanner
 		in.close();
