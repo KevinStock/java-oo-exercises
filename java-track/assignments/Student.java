@@ -91,7 +91,7 @@ public class Student {
 	}
 	
 	// create a legacy student
-	public Student createLegacy(Student parent1, Student parent2) {
+	public static Student createLegacy(Student parent1, Student parent2) {
 		String firstName = parent1.getName();
 		String lastName = parent2.getName();
 		int studentID = parent1.getStudentID() + parent2.getStudentID();
