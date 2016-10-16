@@ -107,6 +107,8 @@ public class Javagram {
 				int level = in.nextInt();
 				return new BrightnessFilter(level);
 			case 5: return new BlurFilter();
+			case 6: return new FlipHorizontal();
+			case 7: return new FlipVertical();
 			default: throw new ArrayIndexOutOfBoundsException();
 		}	
 	}
@@ -118,6 +120,8 @@ public class Javagram {
 		System.out.println("3. Grayscale Filter");
 		System.out.println("4. Brightness Filter");
 		System.out.println("5. Blur Filter");
+		System.out.println("6. Flip Horizontal");
+		System.out.println("7. Flip Vertical");
 		return in.nextInt();
 	}
 }
