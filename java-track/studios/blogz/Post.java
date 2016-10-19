@@ -14,6 +14,7 @@ public class Post {
 		this.title = title;
 		this.body = body;
 		created = new Date();
+		modified = created;
 	}
 
 	public String getTitle() {
@@ -44,13 +45,16 @@ public class Post {
 		return modified;
 	}
 
-	public void setModified(Date modified) {
-		this.modified = modified;
+	public void setModified() {
+		this.modified = new Date();
 	}
 
 	public Date getCreated() {
 		return created;
 	}
 	
-	
+	public static void main(String[] args) {
+		Post p = new Post("First", "1st Post");
+		System.out.println(p.getTitle() + "\n" + p.getBody() + "\n" + p.getCreated() + "\n" + p.getModified());
+	}
 }
