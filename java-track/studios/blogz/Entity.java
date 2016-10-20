@@ -4,8 +4,6 @@ public abstract class Entity {
 
 	private int uid;
 	private static int uidCounter = 0;
-	protected String username;
-	protected String pwdHash;
 	
 	public Entity() {
 		uid = incrementUID();
