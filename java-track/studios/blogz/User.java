@@ -3,13 +3,14 @@ package blogz;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-public class User {
+public class User extends Entity {
 
 	private String username;
 	private String pwdHash;
 	private static ArrayList<User> users = new ArrayList<User>();
 	
 	public User(String username, String password) {
+		super();
 		try {
 			if (isValidUsername(username)) {
 				this.username = username;
@@ -51,8 +52,13 @@ public class User {
 		this.pwdHash = pwdHash;
 	}
 	
+	public String toString() {
+		return "UID: " + this.getUID() + 
+				" Username: " + this.getUsername() + 
+				" PwdHash: " + this.getPwdHash();
+	}
+	
 	public static void main(String[] args) {
-		User u = new User("Kevin?", "123");
-		System.out.println(u.getUsername());
+		// ...
 	}
 }
