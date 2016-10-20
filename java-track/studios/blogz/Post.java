@@ -2,7 +2,7 @@ package blogz;
 
 import java.util.Date;
 
-public class Post {
+public class Post extends Entity {
 
 	private String title;
 	private String body;
@@ -11,6 +11,7 @@ public class Post {
 	private Date modified;
 	
 	public Post(String title, String body) {
+		super();
 		this.title = title;
 		this.body = body;
 		created = new Date();
@@ -53,8 +54,15 @@ public class Post {
 		return created;
 	}
 	
+	public String toString() {
+		return "UID: " + this.getUID() + 
+				" Title: " + this.getTitle() + 
+				" Body: " + this.getBody() + 
+				" Created: " + this.getCreated() + 
+				" Modified: " + this.getModified();
+	}
+	
 	public static void main(String[] args) {
-		Post p = new Post("First", "1st Post");
-		System.out.println(p.getTitle() + "\n" + p.getBody() + "\n" + p.getCreated() + "\n" + p.getModified());
+		// ...
 	}
 }
