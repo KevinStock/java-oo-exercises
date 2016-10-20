@@ -1,5 +1,6 @@
 package blogz;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Post extends Entity {
@@ -9,6 +10,7 @@ public class Post extends Entity {
 	private String author;
 	private final Date created;
 	private Date modified;
+	private static ArrayList<Post> posts = new ArrayList<Post>();
 	
 	public Post(String title, String body) {
 		super();
@@ -16,6 +18,7 @@ public class Post extends Entity {
 		this.body = body;
 		created = new Date();
 		modified = created;
+		posts.add(this);
 	}
 
 	public String getTitle() {
@@ -52,6 +55,10 @@ public class Post extends Entity {
 
 	public Date getCreated() {
 		return created;
+	}
+	
+	public static ArrayList<Post> getPosts() {
+		return posts;
 	}
 	
 	public String toString() {
