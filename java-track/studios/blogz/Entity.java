@@ -23,6 +23,8 @@ public abstract class Entity {
 		Entity p = new Post("First", "1st Post");
 		System.out.println(u);
 		System.out.println(p);
+		System.out.println(User.getUsers());
+		System.out.println(Post.getPosts());
 	}
 	
 }
