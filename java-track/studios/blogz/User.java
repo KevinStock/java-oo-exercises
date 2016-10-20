@@ -52,6 +52,10 @@ public class User extends Entity {
 		this.pwdHash = pwdHash;
 	}
 	
+	public static ArrayList<User> getUsers() {
+		return users;
+	}
+	
 	public String toString() {
 		return "UID: " + this.getUID() + 
 				" Username: " + this.getUsername() + 
