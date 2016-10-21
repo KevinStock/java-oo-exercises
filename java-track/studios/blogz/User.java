@@ -14,15 +14,16 @@ public class User extends Entity {
 		try {
 			if (isValidUsername(username)) {
 				this.username = username;
+				pwdHash = hashPassword(password);
+				users.add(this);
 			}
 			else {
+				Entity.decrementUID();
 				throw new SecurityException();
 			}
 		} catch (Exception e) {
 			System.out.println("Username is not valid");
 		}
-		pwdHash = hashPassword(password);
-		users.add(this);
 	}
 	
 	private static String hashPassword(String password) {
