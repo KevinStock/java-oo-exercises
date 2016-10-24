@@ -89,10 +89,9 @@ public class Javagram {
 			System.out.println("Image saved to " + newFile);
 		}
 		
-	
-		
 		// close input scanner
 		in.close();
+		System.exit(0);
 	}
 	
 	// TODO - refactor this method to accept an int parameter, and return an instance of the Filter interface
