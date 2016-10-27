@@ -1,5 +1,7 @@
 package blogz;
 
+import java.util.Objects;
+
 public abstract class Entity {
 
 	private final int uid;
@@ -20,6 +22,27 @@ public abstract class Entity {
 	
 	public int getUID() {
 		return uid;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		
+		// self check
+		if (this == o)
+			return true;
+		
+		// null check
+		if (o == null)
+			return false;
+		
+		// type check and cast
+		if (getClass() != o.getClass())
+			return false;
+		
+		Entity ent = (Entity) o;
+		
+		// field comparison
+		return Objects.equals(uid, ent.getUID());
 	}
 	
 	public static void main(String[] args) {
