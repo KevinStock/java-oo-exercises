@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.util.Objects;
+
+import fruit.Fruit;
 
 public class Course {
 
@@ -22,6 +25,14 @@ public class Course {
 	// get course name and return it
 	public String getName() {
 		return name;
+	}
+	
+	public int getCredits() {
+		return credits;
+	}
+	
+	public int getSeats() {
+		return seats;
 	}
 	
 	// calculate unfilled seats for course and return it
@@ -71,6 +82,28 @@ public class Course {
 	
 	public static ArrayList<Course> getAllCourses() {
 		return courses;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		// self check
+		if (this == o)
+			return true;
+		
+		// null check
+		if (o == null)
+			return false;
+		
+		// type check and cast
+		if (getClass() != o.getClass())
+			return false;
+		
+		Course course = (Course) o;
+		
+		// field comparison
+		return Objects.equals(name, course.getName()) 
+				&& getCredits() == course.getCredits()
+				&& getSeats() == course.getSeats();
 	}
 	
 	@Override

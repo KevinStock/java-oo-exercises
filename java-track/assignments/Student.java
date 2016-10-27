@@ -1,3 +1,4 @@
+import java.util.Objects;
 
 public class Student {
 
@@ -101,6 +102,24 @@ public class Student {
 		return new Student(firstName, lastName, studentID, credits, gpa);
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		
+		if (this == o)
+			return true;
+		
+		if (o == null)
+			return false;
+		
+		if (getClass() != o.getClass())
+			return false;
+		
+		Student s = (Student) o;
+		
+		return Objects.equals(firstName + " " + lastName, s.getName()) 
+				&& getStudentID() == s.getStudentID();
+	}
+	
 	@Override
 	public String toString() {
 		return "Student [firstName=" + firstName + ", lastName=" + lastName +
