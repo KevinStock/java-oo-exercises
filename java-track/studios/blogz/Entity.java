@@ -25,21 +25,21 @@ public abstract class Entity {
 	}
 	
 	@Override
-	public boolean equals(Object o) {
+	public boolean equals(Object other) {
 		
 		// self check
-		if (this == o)
+		if (this == other)
 			return true;
 		
 		// null check
-		if (o == null)
+		if (other == null)
 			return false;
 		
 		// type check and cast
-		if (getClass() != o.getClass())
+		if (getClass() != other.getClass())
 			return false;
 		
-		Entity ent = (Entity) o;
+		Entity ent = (Entity) other;
 		
 		// field comparison
 		return Objects.equals(uid, ent.getUID());
