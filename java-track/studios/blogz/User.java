@@ -1,6 +1,7 @@
 package blogz;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class User extends Entity {
@@ -55,6 +56,28 @@ public class User extends Entity {
 	
 	public static ArrayList<User> getUsers() {
 		return users;
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		
+		// self check
+		if (this == other)
+			return true;
+		
+		// null check
+		if (other == null)
+			return false;
+		
+		// type check and cast
+		if (getClass() != other.getClass())
+			return false;
+		
+		User u = (User) other;
+		
+		// field comparison
+		return Objects.equals(username, u.getUsername())
+				&& pwdHash == u.getPwdHash();
 	}
 	
 	public String toString() {

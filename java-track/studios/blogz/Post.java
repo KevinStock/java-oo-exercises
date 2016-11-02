@@ -2,6 +2,7 @@ package blogz;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 public class Post extends Entity {
 
@@ -59,6 +60,30 @@ public class Post extends Entity {
 	
 	public static ArrayList<Post> getPosts() {
 		return posts;
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		
+		// self check
+		if (this == other)
+			return true;
+		
+		// null check
+		if (other == null)
+			return false;
+		
+		// type check and cast
+		if (getClass() != other.getClass())
+			return false;
+		
+		Post p = (Post) other;
+		
+		// field comparison
+		return Objects.equals(title, p.getTitle())
+				&& body == p.getBody()
+				&& author == p.getAuthor()
+				&& created == p.getCreated();
 	}
 	
 	public String toString() {
